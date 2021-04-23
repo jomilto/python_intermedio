@@ -7,9 +7,12 @@ def divisors(num):
     return divisors
 
 def run():
-    num = int(input('Type a number: '))
-    print(divisors(num))
-    print('fin')
+    try:
+        num = int(input('Type a number: '))
+        print(divisors(num))
+        print('fin')
+    except ValueError as ve:
+        print("It should be a number")
 
 if __name__ == '__main__':
     run()
