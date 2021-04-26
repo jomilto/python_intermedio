@@ -94,11 +94,11 @@ def check(correct, palabra, caracter, user_errors):
     return correct, user_errors
 
 def print_arreglo(arreglo):
-    cadena = ''
-    for letter in arreglo:
-        cadena = cadena + letter + ' '
+    # cadena = ''
+    # for letter in arreglo:
+    #     cadena = cadena + letter + ' '
 
-    print(cadena)
+    print(*arreglo)
     
 def run():
     caracter = ''
