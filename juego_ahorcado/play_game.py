@@ -1,16 +1,71 @@
-from random import randint
+from random import choice
 
-def get_data_options():
+AHORCADO = [
+    """
+         |------
+         |
+         |
+         |
+    _____|______
+    """,
+    """
+         |------|
+         |
+         |
+         |
+    _____|______
+    """,
+    """
+         |------|
+         |      O
+         |
+         |
+    _____|______
+    """,
+    """
+         |------|
+         |      O
+         |      |
+         |
+    _____|______
+    """,
+    """
+         |------|
+         |      O
+         |     /|
+         |
+    _____|______
+    """,
+    """
+         |------|
+         |      O
+         |     /|\\
+         |
+    _____|______
+    """,  
+    """
+         |------|
+         |      O
+         |     /|\\
+         |     /
+    _____|______
+    """,  
+    """
+         |------|
+         |      O
+         |     /|\\   Game Over!!! :'(
+         |     / \\
+    _____|______
+    """,           
+]
+
+def get_palabra():
     data = []
     with open('../archivos/data.txt','r',encoding='utf-8') as f:
         data = [ line for line in f]
+    palabra = choice(data)
 
-    return data
-
-def get_palabra():
-    data = get_data_options()
-    number = randint(1,len(data))
-    return data[number].upper().replace('\n','')
+    return palabra.upper().replace('\n','')
 
 def start_game(palabra):
     mensaje ="""
@@ -23,65 +78,7 @@ Buena suerte!!! :)
     print('La palabra tiene ',len(palabra),' caracteres')
 
 def print_ahorcado(user_errors):
-    ahorcado = [
-        """
-             |------
-             |
-             |
-             |
-        _____|______
-        """,
-        """
-             |------|
-             |
-             |
-             |
-        _____|______
-        """,
-        """
-             |------|
-             |      O
-             |
-             |
-        _____|______
-        """,
-        """
-             |------|
-             |      O
-             |      |
-             |
-        _____|______
-        """,
-        """
-             |------|
-             |      O
-             |     /|
-             |
-        _____|______
-        """,
-        """
-             |------|
-             |      O
-             |     /|\\
-             |
-        _____|______
-        """,  
-        """
-             |------|
-             |      O
-             |     /|\\
-             |     /
-        _____|______
-        """,  
-        """
-             |------|
-             |      O
-             |     /|\\   Game Over!!! :'(
-             |     / \\
-        _____|______
-        """,           
-    ]
-    print(ahorcado[user_errors])
+    print(AHORCADO[user_errors])
 
 def check(correct, palabra, caracter, user_errors):
     found = 0
@@ -112,9 +109,9 @@ def run():
     correct = ['_' for i in range(1,len(palabra)+1)]
     print_ahorcado(user_errors)
     print_arreglo(correct)
-    while (len(caracter) == 0 and winner == False and user_errors < 7):
+    while (len(caracter) == 0 and winner == False and user_errors < len(AHORCADO)-1):
         caracter = input('Ingresa una letra: ')
-        if caracter.isnumeric():
+        if caracter.isnumeric() or len(caracter) == 0:
             caracter = ''
         else:
             correct, user_errors = check(correct,palabra,caracter.upper(), user_errors)
