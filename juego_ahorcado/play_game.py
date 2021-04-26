@@ -12,7 +12,7 @@ def get_palabra():
     number = randint(1,len(data))
     return data[number].upper().replace('\n','')
 
-def start_game():
+def start_game(palabra):
     mensaje ="""
 Bienvenido al juego del ahorcado. :D
 Adivina la palabra antes de que otro pobre hombre de bits termine colgado. :'(
@@ -20,6 +20,7 @@ Adivina la palabra antes de que otro pobre hombre de bits termine colgado. :'(
 Buena suerte!!! :)
     """
     print(mensaje)
+    print('La palabra tiene ',len(palabra),' caracteres')
 
 def print_ahorcado(user_errors):
     ahorcado = [
@@ -105,8 +106,8 @@ def print_arreglo(arreglo):
 def run():
     caracter = ''
     winner = False
-    start_game()
     palabra = [ letter for letter in get_palabra() ]
+    start_game(palabra)
     user_errors = 0
     correct = ['_' for i in range(1,len(palabra)+1)]
     print_ahorcado(user_errors)
@@ -121,6 +122,8 @@ def run():
             print_arreglo(correct)
             if correct == palabra:
                 winner = True
-                print('Ganaste')
+                print('Ganaste :D')
+    if user_errors == 7:
+        print('La palabra era ', ''.join(palabra))
 if __name__ == '__main__':
     run()
